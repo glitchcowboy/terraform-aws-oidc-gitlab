@@ -17,13 +17,13 @@ provider "aws" {
   region = var.region
 }
 
-module "aws_oidc_github" {
-  source  = "unfunco/oidc-github/aws"
-  version = "0.8.0"
+module "aws_oidc_gitlab" {
+  source  = "modules/glitchcowboy/terraform-aws-oidc-gitlab"
+  version = "0.1.0"
 
-  github_repositories = [
-    "org/repo",
-    "another-org/another-repo:ref:refs/heads/main",
+  gitlab_repositories = [
+    "group/project",
+    "another-group/another-project:ref_type:branch:ref:main",
   ]
 }
 ```
@@ -55,12 +55,12 @@ No modules.
 
 | Name                                                                                                                                                 | Type        |
 |------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
-| [aws_iam_openid_connect_provider.github](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_openid_connect_provider)    | resource    |
-| [aws_iam_role.github](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role)                                          | resource    |
+| [aws_iam_openid_connect_provider.gitlab](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_openid_connect_provider)    | resource    |
+| [aws_iam_role.gitlab](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role)                                          | resource    |
 | [aws_iam_role_policy_attachment.admin](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)       | resource    |
 | [aws_iam_role_policy_attachment.custom](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)      | resource    |
 | [aws_iam_role_policy_attachment.read_only](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)   | resource    |
-| [aws_iam_openid_connect_provider.github](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider) | data source |
+| [aws_iam_openid_connect_provider.gitlab](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider) | data source |
 | [aws_iam_policy_document.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document)            | data source |
 | [aws_partition.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition)                                    | data source |
 
@@ -97,6 +97,8 @@ No modules.
 * [Obtaining the thumbprint for an OpenID Connect Identity Provider]
 
 ## License
+((shamelessly borrowed and modified for gitlab by Barak Griffis 24MAY2022))
+
 
 © 2021 [Daniel Morris](https://unfun.co)  
 Made available under the terms of the [Apache License 2.0].
