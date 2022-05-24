@@ -13,7 +13,7 @@
 // limitations under the License.
 
 output "iam_role_arn" {
-  depends_on  = [aws_iam_role.github]
+  depends_on  = [aws_iam_role.gitlab]
   description = "ARN of the IAM role."
-  value       = var.enabled ? aws_iam_role.github[0].arn : ""
+  value       = var.enabled ? aws_iam_role.gitlab[0].arn : ""
 }

@@ -24,10 +24,9 @@ data "aws_iam_policy_document" "assume_role" {
     condition {
       test = "StringLike"
       values = [
-        for repo in var.github_repositories :
-        "repo:%{if length(regexall(":+", repo)) > 0}${repo}%{else}${repo}:*%{endif}"
+        "project_path:${var.gitlab_repositories[0]}"
       ]
-      variable = "token.actions.githubusercontent.com:sub"
+      variable = "gitlab.com:sub"
     }
 
     principals {
@@ -39,8 +38,8 @@ data "aws_iam_policy_document" "assume_role" {
   version = "2012-10-17"
 }
 
-data "aws_iam_openid_connect_provider" "github" {
+data "aws_iam_openid_connect_provider" "gitlab" {
   count = var.enabled && !var.create_oidc_provider ? 1 : 0
 
-  url = "https://token.actions.githubusercontent.com"
+  url = "https://gitlab.com"
 }

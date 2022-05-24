@@ -1,17 +1,3 @@
-// Copyright © 2021 Daniel Morris
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at:
-//
-// https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 variable "attach_admin_policy" {
   default     = false
   description = "Flag to enable/disable the attachment of the AdministratorAccess policy."
@@ -26,7 +12,7 @@ variable "attach_read_only_policy" {
 
 variable "create_oidc_provider" {
   default     = true
-  description = "Flag to enable/disable the creation of the GitHub OIDC provider."
+  description = "Flag to enable/disable the creation of the GitLab OIDC provider."
   type        = bool
 }
 
@@ -42,34 +28,34 @@ variable "force_detach_policies" {
   type        = string
 }
 
-variable "github_repositories" {
-  description = "List of GitHub organization/repository names authorized to assume the role."
+variable "gitlab_repositories" {
+  description = "List of GitLab groups/subgroup/repository names authorized to assume the role."
   type        = list(string)
 
-  validation {
-    // Ensures each element of github_repositories list matches the
-    // organization/repository format used by GitHub.
-    condition = length([
-      for repo in var.github_repositories : 1
-      if length(regexall("^[A-Za-z0-9_.-]+?/([A-Za-z0-9_.:/-]+|\\*)$", repo)) > 0
-    ]) == length(var.github_repositories)
-    error_message = "Repositories must be specified in the organization/repository format."
-  }
+  #validation {
+    // Ensures each element of gitlab_repositories list matches the
+    // organization/repository format used by GitLab.
+  #  condition = length([
+  #    for repo in var.gitlab_repositories : 1
+  #    if length(regexall("^[A-Za-z0-9_.-]+?/([A-Za-z0-9_.:/-]+|\\*)$", repo)) > 0
+  #  ]) == length(var.gitlab_repositories)
+  #  error_message = "Repositories must be specified in the organization/repository format."
+  #}
 }
 
 // Refer to the README for information on obtaining the thumbprint.
 // This is specified as a variable to allow it to be updated quickly if it is
-// unexpectedly changed by GitHub.
-// See: https://github.blog/changelog/2022-01-13-github-actions-update-on-oidc-based-deployments-to-aws/
-variable "github_thumbprint" {
-  default     = "6938fd4d98bab03faadb97b34396831e3780aea1"
-  description = "GitHub OpenID TLS certificate thumbprint."
+// unexpectedly changed by GitLab.
+// See: https://gitlab.blog/changelog/2022-01-13-gitlab-actions-update-on-oidc-based-deployments-to-aws/
+variable "gitlab_thumbprint" {
+  default     = "b3dd7606d2b5a8b4a13771dbecc9ee1cecafa38a"
+  description = "GitLab OpenID TLS certificate thumbprint."
   type        = string
 }
 
 variable "iam_role_name" {
-  default     = "github"
-  description = "Name of the IAM role to be created. This will be assumable by GitHub."
+  default     = "gitlab"
+  description = "Name of the IAM role to be created. This will be assumable by GitLab."
   type        = string
 }
 

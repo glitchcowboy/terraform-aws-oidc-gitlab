@@ -1,12 +1,12 @@
-# AWS federation for GitHub Actions
+# AWS federation for GitLab Actions
 
 [![CI](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/ci.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/ci.yaml)
 [![Cron / Verify](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/cron.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/cron.yaml)
 [![Security](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/security.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/security.yaml)
 
-Terraform module to configure GitHub Actions as an IAM OIDC identity provider in
-AWS. This enables GitHub Actions to access resources within an AWS account
-without requiring long-lived credentials to be stored as GitHub secrets.
+Terraform module to configure GitLab Actions as an IAM OIDC identity provider in
+AWS. This enables GitLab Actions to access resources within an AWS account
+without requiring long-lived credentials to be stored as GitLab secrets.
 
 ## 🔨 Getting started
 
@@ -14,7 +14,7 @@ without requiring long-lived credentials to be stored as GitHub secrets.
 
 Refer to the [complete example] to view all the available configuration options.
 The following snippet shows the minimum required configuration to create a
-working OIDC connection between GitHub Actions and AWS.
+working OIDC connection between GitLab Actions and AWS.
 
 ```terraform
 provider "aws" {
@@ -32,9 +32,9 @@ module "aws_oidc_github" {
 }
 ```
 
-The following demonstrates how to use GitHub Actions once the Terraform module
+The following demonstrates how to use GitLab Actions once the Terraform module
 has been applied to your AWS account. The action receives a JSON Web Token (JWT)
-from the GitHub OIDC provider and then requests an access token from AWS.
+from the GitLab OIDC provider and then requests an access token from AWS.
 
 ```yaml
 jobs:
@@ -93,11 +93,11 @@ No modules.
 |---------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|----------------|----------------------------------------------|:--------:|
 | <a name="input_attach_admin_policy"></a> [attach\_admin\_policy](#input\_attach\_admin\_policy)                                 | Flag to enable/disable the attachment of the AdministratorAccess policy. | `bool`         | `false`                                      |    no    |
 | <a name="input_attach_read_only_policy"></a> [attach\_read\_only\_policy](#input\_attach\_read\_only\_policy)                   | Flag to enable/disable the attachment of the ReadOnly policy.            | `bool`         | `true`                                       |    no    |
-| <a name="input_create_oidc_provider"></a> [create\_oidc\_provider](#input\_create\_oidc\_provider)                              | Flag to enable/disable the creation of the GitHub OIDC provider.         | `bool`         | `true`                                       |    no    |
+| <a name="input_create_oidc_provider"></a> [create\_oidc\_provider](#input\_create\_oidc\_provider)                              | Flag to enable/disable the creation of the GitLab OIDC provider.         | `bool`         | `true`                                       |    no    |
 | <a name="input_enabled"></a> [enabled](#input\_enabled)                                                                         | Flag to enable/disable the creation of resources.                        | `bool`         | `true`                                       |    no    |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies)                           | Flag to force detachment of policies attached to the IAM role.           | `string`       | `false`                                      |    no    |
-| <a name="input_github_repositories"></a> [github\_repositories](#input\_github\_repositories)                                   | List of GitHub organization/repository names.                            | `list(string)` | n/a                                          |   yes    |
-| <a name="input_github_thumbprint"></a> [github\_thumbprint](#input\_github\_thumbprint)                                         | GitHub OpenID TLS certificate thumbprint.                                | `string`       | `"6938fd4d98bab03faadb97b34396831e3780aea1"` |    no    |
+| <a name="input_github_repositories"></a> [github\_repositories](#input\_github\_repositories)                                   | List of GitLab organization/repository names.                            | `list(string)` | n/a                                          |   yes    |
+| <a name="input_github_thumbprint"></a> [github\_thumbprint](#input\_github\_thumbprint)                                         | GitLab OpenID TLS certificate thumbprint.                                | `string`       | `"6938fd4d98bab03faadb97b34396831e3780aea1"` |    no    |
 | <a name="iam_role_inline_policies"></a> [iam\_role\_inline\_policies](#iam\_role\_inline\_policies)                             | Inline policies map with policy name as key and json as value.           | `map(string)`  | `{}`                                         |    no    |
 | <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name)                                                   | Name of the IAM role.                                                    | `string`       | `"github"`                                   |    no    |
 | <a name="input_iam_role_path"></a> [iam\_role\_path](#input\_iam\_role\_path)                                                   | Path to the IAM role.                                                    | `string`       | `"/"`                                        |    no    |
