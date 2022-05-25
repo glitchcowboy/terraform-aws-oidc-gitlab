@@ -18,7 +18,7 @@ provider "aws" {
 }
 
 module "aws_oidc_gitlab" {
-  source  = "modules/glitchcowboy/terraform-aws-oidc-gitlab"
+  source  = "modules/glitchcowboy/terraform-aws-oidc-gitlab" #aint gonna work
   version = "0.1.0"
 
   gitlab_repositories = [
