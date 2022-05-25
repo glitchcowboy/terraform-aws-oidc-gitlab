@@ -1,7 +1,7 @@
-# AWS federation for GitLab Actions
+# AWS federation for GitLab Pipeline Runners
 
 Terraform module to configure GitLab as an IAM OIDC identity provider in
-AWS. This enables GitLab to access resources within an AWS account
+AWS. This enables GitLab runners to access resources within an AWS account
 without requiring long-lived credentials to be stored as GitLab secrets.
 
 ## 🔨 Getting started
@@ -10,7 +10,11 @@ without requiring long-lived credentials to be stored as GitLab secrets.
 
 Refer to the [complete example] to view all the available configuration options.
 The following snippet shows the minimum required configuration to create a
-working OIDC connection between GitLab Actions and AWS.
+working OIDC connection between GitLab and AWS.  This is a fork of unfunco's OIDC 
+implementation for GitHub Actions.  Please attribute all credit to it's author and
+all mistakes to me.  Please excuse any nonsensical associations like "GitLab Actions" 
+or gitlabusercontent.com as I did quite a few find/replace operations and haven't 
+cleaned up the code yet to better fit GitLab methods/terminology
 
 ```terraform
 provider "aws" {
@@ -18,7 +22,7 @@ provider "aws" {
 }
 
 module "aws_oidc_gitlab" {
-  source  = "modules/glitchcowboy/terraform-aws-oidc-gitlab"
+  source  = "modules/glitchcowboy/terraform-aws-oidc-gitlab" #This doesn't exist yet
   version = "0.1.0"
 
   gitlab_repositories = [
@@ -28,7 +32,7 @@ module "aws_oidc_gitlab" {
 }
 ```
 
-The following demonstrates how to use GitLab Actions once the Terraform module
+The following demonstrates how to use GitLab once the Terraform module
 has been applied to your AWS account. The action receives a JSON Web Token (JWT)
 from the GitLab OIDC provider and then requests an access token from AWS.
 
