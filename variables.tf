@@ -33,8 +33,8 @@ variable "gitlab_repositories" {
   type        = list(string)
 
   #validation {
-    // Ensures each element of gitlab_repositories list matches the
-    // organization/repository format used by GitLab.
+  // Ensures each element of gitlab_repositories list matches the
+  // organization/repository format used by GitLab.
   #  condition = length([
   #    for repo in var.gitlab_repositories : 1
   #    if length(regexall("^[A-Za-z0-9_.-]+?/([A-Za-z0-9_.:/-]+|\\*)$", repo)) > 0

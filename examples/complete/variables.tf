@@ -28,33 +28,29 @@ variable "force_detach_policies" {
   type        = string
 }
 
-variable "github_repositories" {
-  description = "List of GitHub organization/repository names authorized to assume the role."
+variable "gitlab_repositories" {
+  description = "List of GitLab group/[subgroup/]project[:branch_ref] names authorized to assume the role."
   type        = list(string)
 
   validation {
-    // Ensures each element of github_repositories list matches the
+    // Ensures each element of gitlab_repositories list matches the
     // organization/repository format used by GitHub.
     condition = length([
-      for repo in var.github_repositories : 1
+      for repo in var.gitlab_repositories : 1
       if length(regexall("^[A-Za-z0-9_.-]+?/([A-Za-z0-9_.:/-]+|\\*)$", repo)) > 0
-    ]) == length(var.github_repositories)
+    ]) == length(var.gitlab_repositories)
     error_message = "Repositories must be specified in the organization/repository format."
   }
 }
 
-// Refer to the README for information on obtaining the thumbprint.
-// This is specified as a variable to allow it to be updated quickly if it is
-// unexpectedly changed by GitHub.
-// See: https://github.blog/changelog/2022-01-13-github-actions-update-on-oidc-based-deployments-to-aws/
-variable "github_thumbprint" {
+variable "gitlab_thumbprint" {
   default     = "6938fd4d98bab03faadb97b34396831e3780aea1"
-  description = "GitHub OpenID TLS certificate thumbprint."
+  description = "GitLab OpenID TLS certificate thumbprint."
   type        = string
 }
 
 variable "iam_role_name" {
-  default     = "github"
+  default     = "gitlab"
   description = "Name of the IAM role to be created. This will be assumable by GitHub."
   type        = string
 }
