@@ -106,12 +106,13 @@ No modules.
 ((shamelessly borrowed and modified for gitlab by Barak Griffis 24MAY2022))
 
 
-© 2021 [Daniel Morris](https://unfun.co)  
+© 2021 [Daniel Morris](https://unfun.co)
+© 2022 [Barak Griffis](https://griff.sh)  
 Made available under the terms of the [Apache License 2.0].
 
 [Apache License 2.0]: LICENSE.md
 [Complete example]: examples/complete
-[Configuring OpenID Connect in Amazon Web Services]: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
+[Configuring OpenID Connect in Amazon Web Services]: https://docs.gitlab.com/ee/ci/cloud_services/aws/
 [Creating OpenID Connect (OIDC) identity providers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html
 [Make]: https://www.gnu.org/software/make/
 [Obtaining the thumbprint for an OpenID Connect Identity Provider]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc_verify-thumbprint.html
